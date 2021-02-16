@@ -1,27 +1,34 @@
-import './Custom.css'
+import './App.css';
+import Card from './Card';
+import faker from 'faker';
 
 function App() {
-
-  const styles = {
-    outerDiv: { padding: '70px 0', backgroundColor: 'blue' },
-    innerdiv: {
-      textAlign: "center",
-      margin: "auto",
-      width: "60%",
-      border: "3px solid black",
-      backgroundColor: "#73ad21",
-      padding: "70px 0"
-    }
-  }
-
-  const sometext = 'sometext';
-  const somediv = <div style={{backgroundColor: 'white'}} >somediv</div>
+  const buttonsMarkup = (
+    <div>
+      <button class="button button2">YES</button>
+      <button class="button button3">NO</button>
+    </div>
+  );
 
   return (
-    <div style={styles.outerDiv} >
-      <div style={styles.innerdiv} > {somediv} </div>
+    <div className="App">
+      <Card
+        avatar={faker.image.avatar()}
+        name={`${faker.name.firstName()} ${faker.name.firstName()}`}
+        title={faker.name.jobTitle()} >{buttonsMarkup}
+      </Card>
+      <Card
+        avatar={faker.image.avatar()}
+        name={`${faker.name.firstName()} ${faker.name.firstName()}`}
+        title={faker.name.jobTitle()} >{buttonsMarkup}
+      </Card>
+      <Card
+        avatar={faker.image.avatar()}
+        name={`${faker.name.firstName()} ${faker.name.firstName()}`}
+        title={faker.name.jobTitle()} >{buttonsMarkup}
+      </Card>
     </div>
-  )
+  );
 }
 
 export default App;
