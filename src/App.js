@@ -6,34 +6,49 @@ import { AvatarGenerator } from 'random-avatar-generator';
 
 const generator = new AvatarGenerator();
 
+console.log(generator.generateRandomAvatar())
+
 
 
 function App() {
-  const [name, setName] = useState('Alan Smith');
+  const [cards, setCards] = useState([
+    {
+      id: 'adf1a',
+      name: 'Damaris Schuster',
+      title: 'International Operation Producer',
+      avatar: 'https://avataaars.io/?accessoriesType=Wayfarers&avatarStyle=Circle&clotheColor=PastelBlue&clotheType=BlazerSweater&eyeType=Close&eyebrowType=Angry&facialHairColor=Auburn&facialHairType=BeardLight&hairColor=PastelPink&hatColor=Gray02&mouthType=Sad&skinColor=Black&topType=ShortHairShortFlat'
+    },
+    {
+      id: 'a3dfa',
+      name: 'Bartholome Dietriich',
+      title: 'Future Security Developer',
+      avatar: 'https://avataaars.io/?accessoriesType=Kurt&avatarStyle=Circle&clotheColor=Gray02&clotheType=BlazerShirt&eyeType=Happy&eyebrowType=RaisedExcited&facialHairColor=Black&facialHairType=BeardLight&hairColor=SilverGray&hatColor=White&mouthType=Eating&skinColor=Black&topType=WinterHat4'
+    },
+    {
+      id: 'ad2fa',
+      name: 'Pattie Miller',
+      title: 'Forwarnd Metrics Analysys',
+      avatar: 'https://avataaars.io/?accessoriesType=Kurt&avatarStyle=Circle&clotheColor=Blue03&clotheType=GraphicShirt&eyeType=EyeRoll&eyebrowType=SadConcerned&facialHairColor=BrownDark&facialHairType=MoustacheMagnum&hairColor=Auburn&hatColor=Pink&mouthType=Smile&skinColor=DarkBrown&topType=ShortHairTheCaesar'
+    },
+  ])
   const [showCard, setShowCard] = useState(true);
-
-  
-
-  
-
-  const changeNameHandler = name => setName(name)
-
-  const ChangeInputHandler = event => setName(event.target.value)
   const toggleShowCard = () => setShowCard(!showCard);
+  const deleteCardHandler = (cardIndex) => {
+    const cards_copy = [...cards];
+    cards_copy.splice(cardIndex, 1);
+    console.log('cards_copy', cards_copy)
+    console.log('cards', cards)
+    setCards(cards_copy);
+  };
 
-  const buttonsMarkup = (
-    <div>
-      <button className="button button2">YES</button>
-      <button className="button button3">NO</button>
-    </div>
+  const cardsMarkup = showCard && (cards.map((card, index) => <Card
+    avatar={card.avatar}
+    name={card.name}
+    title={card.title}
+    key={card.id}
+    onDelete={() => {deleteCardHandler(index)}}
+  />)
   );
-  const cardsMarkup = (showCard && <Card
-    avatar='https://avataaars.io/?accessoriesType=Wayfarers&avatarStyle=Circle&clotheColor=PastelBlue&clotheType=BlazerSweater&eyeType=Close&eyebrowType=Angry&facialHairColor=Auburn&facialHairType=BeardLight&hairColor=PastelPink&hatColor=Gray02&mouthType=Sad&skinColor=Black&topType=ShortHairShortFlat'
-    name={name}
-    onChangeName={() => changeNameHandler('Michael Chan')}
-    onChangeInput={ChangeInputHandler}
-    title='Dynamic Accounts Specialist' >{buttonsMarkup} 
-  </Card>);
 
   return (
     <div className="App">
