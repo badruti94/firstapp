@@ -1,8 +1,21 @@
 import { useState } from 'react';
 import './App.css';
 import Card from './Card';
-import faker from 'faker';
 import { AvatarGenerator } from 'random-avatar-generator';
+import styled from 'styled-components'
+
+const Button = styled.button`
+  background-color: ${props => props.length>2? '#4CAF50' : props.length<2? 'red':'pink'};
+  border: none;
+  color: ${props => props.length<=1?'black':'white'};
+  font-weight:${props => props.length<=1?'bold':'normal'};
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;`
 
 const generator = new AvatarGenerator();
 
@@ -41,7 +54,7 @@ function App() {
     setCards(cards_copy);
   };
 
-  const changeNameHandler = (event,id) => {
+  const changeNameHandler = (event, id) => {
     //1. which card
     const cardIndex = cards.findIndex(card => card.id == id);
 
@@ -53,19 +66,32 @@ function App() {
     setCards(cards_copy)//
   }
 
+  /* const buttonStyle = {
+    backgroundColor : null
+  } */
+
+  const classes = ['button']
+
+
+  if (cards.length < 3) classes.push('pink');
+  if (cards.length < 2) classes.push('red text');
+
+  console.log(classes);
+
   const cardsMarkup = showCard && (cards.map((card, index) => <Card
     avatar={card.avatar}
     name={card.name}
     title={card.title}
     key={card.id}
-    onDelete={() => {deleteCardHandler(index)}}
-    onChangeName = { (event) => changeNameHandler(event,card.id) }
+    onDelete={() => { deleteCardHandler(index) }}
+    onChangeName={(event) => changeNameHandler(event, card.id)}
   />)
   );
 
   return (
     <div className="App">
-      <button className='button' onClick={toggleShowCard} >Toggle show/hide</button>
+      <Button length={cards.length} >Toggle</Button>
+      <button className={classes.join(' ')} onClick={toggleShowCard} >Toggle show/hide</button>
       {cardsMarkup}
     </div>
   );
