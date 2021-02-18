@@ -50,7 +50,7 @@ function App() {
     //3. change the name of the spesifics
     cards_copy[cardIndex].name = event.target.value
     //4. set the cards with the latest version of card copy
-    setCards(cards_copy)
+    setCards(cards_copy)//
   }
 
   const cardsMarkup = showCard && (cards.map((card, index) => <Card
