@@ -17,7 +17,7 @@ const Card = props => {
         return () => {
             console.log('Cardjs cleanup');
             window.removeEventListener('mousemove', recordMouse)
-        }
+        }//
     }, [])
     
 
