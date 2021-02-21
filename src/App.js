@@ -81,6 +81,10 @@ class App extends Component {
     console.log('App js componentDidMount')
   }
   render() {
+    if(this.state.showCard === false){
+      return <div>nothing</div>
+    }
+
     console.log('App js render')
     const classes = ['button']
 

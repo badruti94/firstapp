@@ -2,7 +2,29 @@ import { Component } from 'react'
 import './App.css';
 
 class Card extends Component {
-    //console.log(props)
+    static getDerivedStateFromProps(props, state) {
+        console.log('Card js getDerivedStateFromProps')
+        return state
+    }
+
+    shouldComponentUpdate(nextProps, nextState){
+        console.log('Card is shouldComponentUpdate');
+        return true
+    }
+
+    getSnapshotBeforeUpdate(prevProps, prevState){
+        console.log('Card js is getSnapshotBeforeUpdate')
+        //return null
+        return {message: 'some snapshot'}
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot){
+        console.log('Card js componenDidUpdate', snapshot);
+    }
+
+    componentWillUnmount(){
+        console.log('Card js component will unmount');
+    }
 
     render() {
         console.log('Cards js rendering');
