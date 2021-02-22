@@ -1,18 +1,11 @@
 import React from 'react';
 import './App.css';
-import ComponentA from "./component/ComponentA";
-export const NameContext = React.createContext();
-export const ColorContext = React.createContext();
+import  Counter from "./component/Counter";
 
 function App() {
   return (
     <div className="App">
-      <NameContext.Provider value={'Smith'} >
-        <ColorContext.Provider value={'red'} >
-          <ComponentA />
-        </ColorContext.Provider>
-
-      </NameContext.Provider>
+      <Counter />
     </div>
   );
 }
