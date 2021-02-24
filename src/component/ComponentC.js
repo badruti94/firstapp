@@ -2,9 +2,8 @@ import { useContext } from 'react'
 import { Button, ButtonGroup, Badge } from "reactstrap";
 import { CounterContext } from '../App'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import ComponentB from "./ComponentB";
 
-const ComponentA = () => {
+const ComponentC = () => {
     const counterContext = useContext(CounterContext)
     console.log(counterContext)
 
@@ -14,7 +13,7 @@ const ComponentA = () => {
         <div>
             <ButtonGroup>
                 <Button color="primary" outline >
-                    ComponentA Counter1 <Badge color="secondary" >{counter}</Badge>
+                    ComponentC Counter1 <Badge color="secondary" >{counter}</Badge>
                 </Button>
             </ButtonGroup>
             <p></p>
@@ -24,11 +23,10 @@ const ComponentA = () => {
                 <Button color="danger" onClick={() => dispatch({ type: 'reset' })} >reset</Button>
             </ButtonGroup>
             <p></p>
-            <ComponentB />
 
         </div>
 
     )
 }
 
-export default ComponentA
+export default ComponentC
