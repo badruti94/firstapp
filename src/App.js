@@ -1,38 +1,57 @@
-import React, { useReducer } from 'react';
+import { useEffect, useReducer } from 'react'
+import axios from 'axios'
 import './App.css';
-import './component/ComponentA'
-import ComponentA from './component/ComponentA';
-export const CounterContext = React.createContext()
 
 const initialState = {
-  counter: 0,
-
+  loading: true,
+  error: "",
+  todos: []
 }
+
 const reducer = (state, action) => {
   switch (action.type) {
-    case 'increment':
-      return { ...state, counter: state.counter + action.payload }
-    case 'decrement':
-      return { ...state, counter: state.counter - action.payload }
-    case 'reset':
-      return initialState
+    case 'SET_DATA':
+      return {
+        loading: false,
+        error: "",
+        todos: action.payload,
+      }
+      break;
+    case 'SET_ERROR':
+      return {
+        loading: false,
+        error: "There are some errors",
+        todos: [],
+      }
+      break;
+
     default:
       return state;
+      break;
   }
 }
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState)
+  useEffect(() => {
+    axios.get('https://jsonplaceholder.typicode.com/todos').
+      then(res => {
+        console.log(res.data);
+        dispatch({ type: 'SET_DATA', payload: res.data })
+      })
+      .catch(err => {
+        dispatch({ type: 'SET_ERROR' })
+      })
+
+  }, [])
+
+  const listmarkup = <ul>
+    {state.todos.map(todo => <li key={todo.id} >{todo.title} </li> )}
+  </ul>
   return (
-    <CounterContext.Provider value={{ counter: state.counter, dispatch }} >
-
-      <div className="App">
-        App js {state.counter}
-        <ComponentA />
-      </div>
-    </CounterContext.Provider>
-
-
+    <div className="App">
+      {state.loading?'Loading':state.error ? state.error:listmarkup}
+    </div>
   );
 }
 
