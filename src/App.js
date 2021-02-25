@@ -1,58 +1,24 @@
-import { useEffect, useReducer } from 'react'
-import axios from 'axios'
+import { useState, useMemo } from 'react';
 import './App.css';
-import { ListGroup, ListGroupItem, Badge } from "reactstrap";
-import 'bootstrap/dist/css/bootstrap.min.css'
-
-const initialState = {
-  loading: true,
-  error: "",
-  todos: []
-}
-
-const reducer = (state, action) => {
-  switch (action.type) {
-    case 'SET_DATA':
-      return {
-        loading: false,
-        error: "",
-        todos: action.payload,
-      }
-      break;
-    case 'SET_ERROR':
-      return {
-        loading: false,
-        error: "There are some errors",
-        todos: [],
-      }
-      break;
-
-    default:
-      return state;
-      break;
-  }
-}
+import ComponentA from "./components/ComponentA";
 
 function App() {
-  const [state, dispatch] = useReducer(reducer, initialState)
-  useEffect(() => {
-    axios.get('https://jsonplaceholder.typicode.com/todos').
-      then(res => {
-        console.log(res.data);
-        dispatch({ type: 'SET_DATA', payload: res.data })
-      })
-      .catch(err => {
-        dispatch({ type: 'SET_ERROR' })
-      })
+  const [countA, setCountA] = useState(0)
+  const incrementA = () => {
+    setCountA(countA + 1)
+  };
 
-  }, [])
+  const memoComponentA = useMemo(() => {
+    return <ComponentA />
+  },[])
 
-  const listmarkup = <ListGroup>
-    {state.todos.map(todo => <ListGroupItem key={todo.id} >{todo.title} { todo.completed?(<Badge color='success' >Completed</Badge>):(<Badge color='danger' >Incompleted</Badge>) } </ListGroupItem>)}
-  </ListGroup>
   return (
     <div className="App">
-      {state.loading ? 'Loading' : state.error ? state.error : listmarkup}
+      App js count A : {countA}
+      <p>
+        <button onClick={incrementA} >Increment A</button>
+      </p>
+      {memoComponentA}
     </div>
   );
 }
