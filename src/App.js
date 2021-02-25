@@ -1,12 +1,10 @@
 import './App.css';
-import ComponentA from './components/ComponentA'
-import ComponentB from './components/ComponentB'
+import Form from './components/Form';
 
 function App() {
-  return ( 
+  return (
     <div className="App">
-      <ComponentA />
-      <ComponentB />
+      <Form />
     </div>
   );
 }
