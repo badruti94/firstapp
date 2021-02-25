@@ -1,33 +1,16 @@
-import { useState, useMemo } from 'react';
+import {useRef  } from "react";
 import './App.css';
-import ComponentA from "./components/ComponentA";
-import ComponentB from "./components/ComponentB";
 
 function App() {
-  const [countA, setCountA] = useState(0)
-  const [countB, setCountB] = useState(0)
-  const incrementA = () => {
-    setCountA(countA + 1)
-  };
-  const incrementB = () => {
-    setCountB(countB + 1)
-  };
-//
-  const memoComponentA = useMemo(() => {
-    return <ComponentA count={countA} />
-  },[countA])
-
+  const inputRef = useRef()
   return (
     <div className="App">
-      App js count A : {countA}
-      <p>
-        <button onClick={incrementA} >Increment A</button>
-      </p>
-      <p>
-        <button onClick={incrementB} >Increment B</button>
-      </p>
-      {memoComponentA}
-      <ComponentB count={countB} />
+      <input ref={inputRef} type="text"/>
+      <input type="text"/>
+      <input type="text"/>
+      <button onClick={()=>{
+        inputRef.current.focus()
+      }} >focus</button>
     </div>
   );
 }
