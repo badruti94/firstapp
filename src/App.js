@@ -12,7 +12,7 @@ function App() {
   const incrementB = () => {
     setCountB(countB + 1)
   };
-
+//
   const memoComponentA = useMemo(() => {
     return <ComponentA count={countA} />
   },[countA])
