@@ -3,7 +3,7 @@ import { Button, ButtonGroup, Badge } from 'reactstrap';
 import useCounter from "../customhook/useCounter";
 
 const ComponentB = () => {
-    const [count, increment, decrement, reset] = useCounter(0)
+    const [count, increment, decrement, reset] = useCounter(0,3)
     return (
         <div>
             <ButtonGroup>
