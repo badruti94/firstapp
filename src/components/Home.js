@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import faker from "faker";
 import axios from 'axios'
+import { Link } from 'react-router-dom';
 
 const Home = () => {
     const [posts, setPosts] = useState([])
@@ -15,9 +16,11 @@ const Home = () => {
 
     const listMarkup = posts.length > 0 ? (
         posts.map(post => (
-            <div className="card"  key={post.id} >
+            <div className="card" key={post.id} >
                 <div className="card-body">
-                    <h5 className="card-title">{post.title} </h5>
+                    <Link to={`/${post.id}`} >
+                        <h5 className="card-title">{post.title} </h5>
+                    </Link>
                     <p className="card-text">{post.body} </p>
                 </div>
             </div>
