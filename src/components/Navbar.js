@@ -1,10 +1,10 @@
 import { NavLink, withRouter } from "react-router-dom";
 
 const Navbar = (props) => {
-    console.log('contact',props);
+    /* console.log('contact',props);
     setTimeout(()=>{
         props.history.push('about')
-    }, 3000)
+    }, 3000) */
     
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
