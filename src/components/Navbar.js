@@ -1,6 +1,11 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, withRouter } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = (props) => {
+    console.log('contact',props);
+    setTimeout(()=>{
+        props.history.push('about')
+    }, 3000)
+    
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <a className="navbar-brand" href="#">Navbar</a>
@@ -24,4 +29,4 @@ const Navbar = () => {
     )
 }
 
-export default Navbar
+export default withRouter(Navbar)
