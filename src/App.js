@@ -4,6 +4,7 @@ import About from './components/About'
 import Contact from './components/Contact'
 import Navbar from './components/Navbar'
 import Post from './components/Post';
+import PageNotFound from './components/PageNotFound';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 function App() {
@@ -15,7 +16,8 @@ function App() {
           <Route exact path='/' component={Home} />
           <Route path='/contact' component={Contact} />
           <Route path='/about' component={About} />
-          <Route path='/:post_id' component={Post} />
+          <Route path='/posts/:post_id' component={Post} />
+          <Route component={PageNotFound} />
         </Switch>
 
       </div>
