@@ -6,6 +6,7 @@ import Navbar from './components/Navbar'
 import Post from './components/Post';
 import PageNotFound from './components/PageNotFound';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
   return (
@@ -14,9 +15,9 @@ function App() {
         <Navbar />
         <Switch>
           <Route exact path='/' component={Home} />
-          <Route path='/contact' component={Contact} />
-          <Route path='/about' component={About} />
-          <Route path='/posts/:post_id' component={Post} />
+          <ProtectedRoute path='/contact' component={Contact} />
+          <ProtectedRoute path='/about' component={About} />
+          <ProtectedRoute path='/posts/:post_id' component={Post} />
           <Route component={PageNotFound} />
         </Switch>
 
