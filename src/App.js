@@ -1,29 +1,45 @@
 import './App.css';
-import Home from './components/Home'
-import About from './components/About'
-import Contact from './components/Contact'
-import Navbar from './components/Navbar'
-import Post from './components/Post';
-import PageNotFound from './components/PageNotFound';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import ProtectedRoute from './components/ProtectedRoute';
+import { createStore } from 'redux';
+import { act } from 'react-dom/test-utils';
+
+//action
+const increment = (value) => {
+  return { type: 'INCREMENT', payload:value }
+}
+const decrement = () => {
+  return { type: 'DECREMENT' }
+}
+
+//reducer
+const counterReducer = (state = 0, action) => {
+  switch (action.type) {
+    case 'INCREMENT':
+      return state + action.payload
+      break;
+    case 'DECREMENT':
+      return state - 1
+      break;
+
+    default:
+      return state;
+      break;
+  }
+}
+
+//create a store
+let store = createStore(counterReducer)
+
+//display
+store.subscribe(()=>{
+  console.log(store.getState());
+})
+//Dispatch the action
+store.dispatch(increment(5))
 
 function App() {
   return (
-    <Router>
-      <div className="App">
-        <Navbar />
-        <Switch>
-          <Route exact path='/' component={Home} />
-          <ProtectedRoute path='/contact' component={Contact} />
-          <ProtectedRoute path='/about' component={About} />
-          <ProtectedRoute path='/posts/:post_id' component={Post} />
-          <Route component={PageNotFound} />
-        </Switch>
-
-      </div>
-    </Router>
-
+    <div className="App">
+    </div>
   );
 }
 
